@@ -1,4 +1,3 @@
-
 import React, { useState, Suspense, lazy } from "react";
 import Sidebar from "./layout/Sidebar";
 import { ErrorBoundary } from "./layout/ErrorBoundary";
@@ -16,48 +15,6 @@ const PublishingPolicies = lazy(() => import("./sections/classification/Publishi
 const CreateAutomationRule = lazy(() => import("./sections/CreateAutomationRule"));
 const Security = lazy(() => import("./sections/Security"));
 const Administration = lazy(() => import("./sections/Administration"));
-
-
-interface ErrorBoundaryProps {
-  children: React.ReactNode;
-}
-
-interface ErrorBoundaryState {
-  hasError: boolean;
-  error: Error | null;
-}
-
-
-  static getDerivedStateFromError(error: Error) {
-    return { hasError: true, error };
-  }
-
-  render() {
-    if (this.state.hasError) {
-      return (
-        <div className="p-6 bg-red-50 rounded-lg border border-red-200">
-          <div className="flex items-start space-x-3">
-            <AlertCircle className="w-5 h-5 text-red-600 mt-0.5" />
-            <div>
-              <h3 className="text-lg font-medium text-red-800">Something went wrong</h3>
-              <p className="mt-1 text-sm text-red-700">
-                {this.state.error?.message || "An unexpected error occurred"}
-              </p>
-              <button
-                onClick={() => this.setState({ hasError: false, error: null })}
-                className="mt-3 text-sm text-red-600 hover:text-red-800"
-              >
-                Try again
-              </button>
-            </div>
-          </div>
-        </div>
-      );
-    }
-
-    return this.props.children;
-  }
-}
 
 const NovaAdminConsole: React.FC = () => {
   const [section, setSection] = useState<Section>("orchestration");
